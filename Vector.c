@@ -17,4 +17,25 @@ Vec* createVector(){
     return vector;
 }
 
-void freeVector();
+void freeVector(Vec* vector){
+    for (int i = 0; i < vector->capacity; ++i){
+        if(!(vector->objects)[i]->data){
+            free((vector->objects)[i]->data);
+        }
+        assert((vector->objects)[i] != NULL);
+        free((vector->objects)[i]);
+    }
+    free(vector->objects);
+    free(vector);
+}
+
+void appendVector(Vec* vector, void* data, enum ObjType type){
+    if(vector->capacity == vector->count){
+        printf("Vector is full, need resizing/n");
+        return;
+    }
+    vector->objects[vector->count]->ObjectType = type;
+    vector->objects[vector->count]->data = data;
+
+    (vector->count)++;
+}

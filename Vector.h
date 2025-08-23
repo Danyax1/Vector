@@ -1,6 +1,7 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
@@ -9,7 +10,8 @@ enum ObjType {
     FLOAT,
     CHAR,
     STRING,
-    ARRAY
+    INT_ARRAY,
+    FLOAT_ARRAY
 };
 
 typedef struct{
@@ -25,4 +27,7 @@ typedef struct {
 
 
 Vec* createVector();
+void freeVector(Vec* vector);
+
+void appendVector(Vec* vector, void* data, enum ObjType type);
 #endif //VECTOR_H_
