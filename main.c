@@ -1,6 +1,10 @@
 #include "Vector.h"
 
 #include <stdio.h>
+#include <string.h>
+
+
+#define arrlen(arr) sizeof(arr)/sizeof((arr)[0])
 
 
 
@@ -24,9 +28,9 @@ int main(void){
     //oversize
     appendVector(my_list, &c, CHAR);
 
+    printVector(my_list);
 
 
     freeVector(my_list);
-    printf("Hello World\n");
     return 0;
 }

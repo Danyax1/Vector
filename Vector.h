@@ -1,9 +1,20 @@
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+
+#include "pprint.h"
+
+#define __GET_SIZE(data, type) \
+    ((type) == STRING ? strlen((char*)(data)) : \
+    ((type) == INT_ARRAY ? sizeof(data)/sizeof(int) : \
+    ((type) == FLOAT_ARRAY ? sizeof(data)/sizeof(float) : 1)))
+
+// Main macro: vec, data, type
+#define appendVector(vec, data, type) \
+    _appendVec((vec), (data), __GET_SIZE((data), (type)), (type))
+
 
 enum ObjType {
     INTEGER,
@@ -16,6 +27,7 @@ enum ObjType {
 
 typedef struct{
     int ObjectType;
+    int size;
     void* data;
 }Object;
 
@@ -28,6 +40,8 @@ typedef struct {
 
 Vec* createVector();
 void freeVector(Vec* vector);
+void printVector(const Vec* vector);
 
-void appendVector(Vec* vector, void* data, enum ObjType type);
+void _appendVec(Vec* vector, void* data, int size, enum ObjType type);
+
 #endif //VECTOR_H_
