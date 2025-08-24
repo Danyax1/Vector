@@ -20,8 +20,10 @@ int main(void){
 
 
     Vec* my_list = createVector();
+    Vec* other_list = createVector();
     
     printVector(my_list);
+    printVector(other_list);
     appendVector(my_list, &x, INTEGER);
     appendVector(my_list, &y, FLOAT);
     appendVector(my_list, str, STRING);
@@ -31,34 +33,36 @@ int main(void){
 
 
     printVector(my_list);
-    printf("Len of my_list: %d\n", lenVector(my_list));
-    popVector(my_list);
+    copyVector(my_list, other_list);
+    printVector(other_list);
+    // printf("Len of my_list: %d\n", lenVector(my_list));
+    // popVector(my_list);
+    // // printVector(my_list);
+
+    // // printf("Len of my_list: %d\n", lenVector(my_list));
+
+    // int datatype;
+    // int size;
+    // void* floats = getVector(my_list, 4, &datatype, &size);
+
+    // // printf("size: %d\n",size);
+    // // printFloatArray(floats, size);
+    // // printf("\n");
+
+    // printf("Before inserting\n");
+
     // printVector(my_list);
 
-    // printf("Len of my_list: %d\n", lenVector(my_list));
+    // insertVector(my_list, 2, &x, INTEGER);
+    // printf("After inserting\n");
+    // printVector(my_list);
 
-    int datatype;
-    int size;
-    void* floats = getVector(my_list, 4, &datatype, &size);
+    // removeVector(my_list, 2);
 
-    // printf("size: %d\n",size);
-    // printFloatArray(floats, size);
-    // printf("\n");
+    // insertVector(my_list, 2, &x, INTEGER);
 
-    printf("Before inserting\n");
+    // removeVector(my_list, 3);
 
-    printVector(my_list);
-
-    insertVector(my_list, 2, &x, INTEGER);
-    printf("After inserting\n");
-    printVector(my_list);
-
-    removeVector(my_list, 2);
-
-    insertVector(my_list, 2, &x, INTEGER);
-
-    removeVector(my_list, 3);
-
-    printVector(my_list);
+    // printVector(my_list);
     return 0;
 }

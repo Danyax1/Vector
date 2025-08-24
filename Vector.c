@@ -124,3 +124,9 @@ void* getVector(const Vec* vector, int index, int* datatype, int* size){
     *size = vector->objects[index]->size;
     return data;
 }
+
+void copyVector(const Vec* src, Vec* dest){
+    for(int i = 0; i < src->count; i++){
+        appendVector(dest, src->objects[i]->data, src->objects[i]->ObjectType);
+    }
+}

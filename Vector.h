@@ -53,4 +53,6 @@ void removeVector(Vec* vector, int index);
 
 int lenVector(const Vec* vector);
 void* getVector(const Vec* vector, int index, int* datatype, int* size);
+
+void copyVector(const Vec* src, Vec* dest);
 #endif //VECTOR_H_
