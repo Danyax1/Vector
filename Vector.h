@@ -41,7 +41,9 @@ typedef struct {
 Vec* createVector();
 void freeVector(Vec* vector);
 void printVector(const Vec* vector);
+void _resizeVec (Vec* vector);
 
 void _appendVec(Vec* vector, void* data, int size, enum ObjType type);
+void* popVector(Vec* vector);
 
 #endif //VECTOR_H_

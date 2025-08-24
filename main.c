@@ -16,9 +16,12 @@ int main(void){
     int arrInt[] = {1, 2, 3, 4, 5};
     float arrFloat[] = {1.1, 2.2, 3.3};
 
+    
 
 
     Vec* my_list = createVector();
+    
+    printVector(my_list);
     appendVector(my_list, &x, INTEGER);
     appendVector(my_list, &y, FLOAT);
     appendVector(my_list, str, STRING);
@@ -30,6 +33,9 @@ int main(void){
 
     printVector(my_list);
 
+    popVector(my_list);
+
+    printVector(my_list);
 
     freeVector(my_list);
     return 0;

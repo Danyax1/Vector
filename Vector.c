@@ -4,7 +4,7 @@
 
 Vec* createVector(){
     Vec* vector = (Vec*)malloc(sizeof(Vec));
-    vector->capacity = 5;
+    vector->capacity = 1;
     vector->count = 0;
     assert(vector != NULL);
 
@@ -20,7 +20,7 @@ Vec* createVector(){
 }
 
 void freeVector(Vec* vector){
-    for (int i = 0; i < vector->capacity; ++i){
+    for (int i = 0; i < vector->count; ++i){
         if(!(vector->objects)[i]->data){
             free((vector->objects)[i]->data);
         }
@@ -32,6 +32,10 @@ void freeVector(Vec* vector){
 }
 
 void printVector(const Vec* vector){
+    if (vector->count == 0) {
+        printf("{}\n");
+        return;
+    }
     printf("{");
     for (int i = 0; i < vector->count - 1; i++){
         Object* obj = vector->objects[i];
@@ -88,12 +92,30 @@ void printVector(const Vec* vector){
 
 void _appendVec(Vec* vector, void* data, int size, enum ObjType type){
     if(vector->capacity == vector->count){
-        printf("Vector is full, need resizing\n");
-        return;
+        _resizeVec(vector);
     }
     vector->objects[vector->count]->ObjectType = type;
     vector->objects[vector->count]->data = data;
     vector->objects[vector->count]->size = size;
 
-    (vector->count)++;
+    ++(vector->count);
+}
+
+void* popVector(Vec* vector){
+    assert(vector->count != 0);
+    void *data = vector->objects[vector->count - 1]->data;
+    assert(data != NULL);
+    --(vector->count);
+    return data;
+}
+
+
+void _resizeVec (Vec* vector){
+    vector->objects = (Object**) realloc(vector->objects, vector->capacity * sizeof(Object*) *2);
+    assert(vector->objects != NULL);
+    for (int i = vector->capacity; i < vector->capacity*2; ++i){
+        (vector->objects)[i] = (Object*) malloc(sizeof(Object));
+        assert((vector->objects)[i]!= NULL);
+    }
+    vector->capacity *= 2;
 }
