@@ -45,6 +45,12 @@ int main(void){
     printFloatArray(floats, size);
     printf("\n");
 
-    freeVector(my_list);
+    printf("Before inserting\n");
+
+    printVector(my_list);
+
+    insertVector(my_list, 2, &x, INTEGER);
+    printf("After inserting\n");
+    printVector(my_list);
     return 0;
 }

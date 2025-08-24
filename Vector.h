@@ -2,6 +2,7 @@
 #define VECTOR_H_
 
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 
 #include "pprint.h"
@@ -11,9 +12,11 @@
     ((type) == INT_ARRAY ? sizeof(data)/sizeof(int) : \
     ((type) == FLOAT_ARRAY ? sizeof(data)/sizeof(float) : 1)))
 
-// Main macro: vec, data, type
 #define appendVector(vec, data, type) \
     _appendVec((vec), (data), __GET_SIZE((data), (type)), (type))
+
+#define insertVector(vec, index, data, type) \
+    _insertVec((vec), (index) ,(data), __GET_SIZE((data), (type)), (type))
 
 
 enum ObjType {
@@ -45,6 +48,7 @@ void _resizeVec (Vec* vector);
 
 void _appendVec(Vec* vector, void* data, int size, enum ObjType type);
 void* popVector(Vec* vector);
+void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type);
 
 int lenVector(const Vec* vector);
 void* getVector(const Vec* vector, int index, int* datatype, int* size);

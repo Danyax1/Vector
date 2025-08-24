@@ -20,9 +20,6 @@ Vec* createVector(){
 
 void freeVector(Vec* vector){
     for (int i = 0; i < vector->count; ++i){
-        if(!(vector->objects)[i]->data){
-            free((vector->objects)[i]->data);
-        }
         assert((vector->objects)[i] != NULL);
         free((vector->objects)[i]);
     }
@@ -48,6 +45,8 @@ void printVector(const Vec* vector){
 };
 
 void _appendVec(Vec* vector, void* data, int size, enum ObjType type){
+    assert(data!= NULL);
+    assert(INTEGER <= type <= FLOAT_ARRAY);
     if(vector->capacity == vector->count){
         _resizeVec(vector);
     }
@@ -66,6 +65,27 @@ void* popVector(Vec* vector){
     return data;
 }
 
+void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type){
+    assert(data!= NULL);
+    assert(INTEGER <= type <= FLOAT_ARRAY);
+    assert(0 <= index<= vector->count);
+    if(index == vector->count){
+        _appendVec(vector, data, size, type);
+        return;
+    }
+    if(vector->capacity == vector->count){
+        _resizeVec(vector);
+    }
+    ++(vector->count);
+    memmove(&vector->objects[index+1], &vector->objects[index], (vector->count - index)*sizeof(Object*));
+    
+    vector->objects[index] = (Object*)malloc(sizeof(Object));
+    assert(vector->objects[index] != NULL);
+    
+    vector->objects[index]->ObjectType = type;
+    vector->objects[index]->data = data;
+    vector->objects[index]->size = size;
+}
 
 void _resizeVec (Vec* vector){
     vector->objects = (Object**) realloc(vector->objects, vector->capacity * sizeof(Object*) *2);
