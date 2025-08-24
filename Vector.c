@@ -119,3 +119,7 @@ void _resizeVec (Vec* vector){
     }
     vector->capacity *= 2;
 }
+
+int lenVector(const Vec* vector){
+    return vector->count;
+}

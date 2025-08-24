@@ -27,15 +27,15 @@ int main(void){
     appendVector(my_list, str, STRING);
     appendVector(my_list, arrInt, INT_ARRAY);
     appendVector(my_list, arrFloat, FLOAT_ARRAY);
-
-    //oversize
     appendVector(my_list, &c, CHAR);
 
-    printVector(my_list);
 
+    printVector(my_list);
+    printf("Len of my_list: %d\n", lenVector(my_list));
     popVector(my_list);
-
     printVector(my_list);
+
+    printf("Len of my_list: %d\n", lenVector(my_list));
 
     freeVector(my_list);
     return 0;
