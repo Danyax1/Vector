@@ -1,7 +1,6 @@
 #include "Vector.h"
 
 
-
 Vec* createVector(){
     Vec* vector = (Vec*)malloc(sizeof(Vec));
     vector->capacity = 1;
@@ -39,54 +38,12 @@ void printVector(const Vec* vector){
     printf("{");
     for (int i = 0; i < vector->count - 1; i++){
         Object* obj = vector->objects[i];
-        switch (obj->ObjectType){
-            case INTEGER:
-                printInteger(obj->data);
-                break;
-            case FLOAT:
-                printFloat(obj->data);
-                break;
-            case CHAR:
-                printChar(obj->data);
-                break;
-            case STRING:
-                printString(obj->data);
-                break;
-            case INT_ARRAY:
-                printIntArray(obj->data, obj->size);
-                break;
-            case FLOAT_ARRAY:
-                printFloatArray(obj->data, obj->size);
-                break;
-            default:
-                printf("Invalid type\n");
-        }
+        printType(obj->data, obj->size, obj->ObjectType);
         printf(", ");
     
     }
     Object* obj = vector->objects[vector->count - 1];
-    switch (obj->ObjectType){
-        case INTEGER:
-            printInteger(obj->data);
-            break;
-        case FLOAT:
-            printFloat(obj->data);
-            break;
-        case CHAR:
-            printChar(obj->data);
-            break;
-        case STRING:
-            printString(obj->data);
-            break;
-        case INT_ARRAY:
-            printIntArray(obj->data, obj->size);
-            break;
-        case FLOAT_ARRAY:
-            printFloatArray(obj->data, obj->size);
-            break;
-        default:
-            printf("Invalid type\n");
-    }
+    printType(obj->data, obj->size, obj->ObjectType);
     printf("}\n");
 };
 

@@ -26,3 +26,28 @@ void printFloatArray(float* arr, int size){
     }
     printf("%f]", arr[size - 1]);
 }
+
+void printType(void* data, int size, int type){
+    switch (type){
+        case INTEGER:
+            printInteger((int*)data);
+            break;
+        case FLOAT:
+            printFloat((float*)data);
+            break;
+        case CHAR:
+            printChar((char*)data);
+            break;
+        case STRING:
+            printString((char*)data);
+            break;
+        case INT_ARRAY:
+            printIntArray((int*)data, size);
+            break;
+        case FLOAT_ARRAY:
+            printFloatArray((float*)data, size);
+            break;
+        default:
+            printf("Invalid type\n");
+    }
+}
