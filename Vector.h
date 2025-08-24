@@ -43,12 +43,13 @@ typedef struct {
 
 Vec* createVector();
 void freeVector(Vec* vector);
-void printVector(const Vec* vector);
 void _resizeVec (Vec* vector);
+void printVector(const Vec* vector);
 
 void _appendVec(Vec* vector, void* data, int size, enum ObjType type);
 void* popVector(Vec* vector);
 void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type);
+void removeVector(Vec* vector, int index);
 
 int lenVector(const Vec* vector);
 void* getVector(const Vec* vector, int index, int* datatype, int* size);

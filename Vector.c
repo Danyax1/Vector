@@ -27,6 +27,16 @@ void freeVector(Vec* vector){
     free(vector);
 }
 
+void _resizeVec (Vec* vector){
+    vector->objects = (Object**) realloc(vector->objects, vector->capacity * sizeof(Object*) *2);
+    assert(vector->objects != NULL);
+    for (int i = vector->capacity; i < vector->capacity*2; ++i){
+        (vector->objects)[i] = (Object*) malloc(sizeof(Object));
+        assert((vector->objects)[i]!= NULL);
+    }
+    vector->capacity *= 2;
+}
+
 void printVector(const Vec* vector){
     if (vector->count == 0) {
         printf("{}\n");
@@ -76,7 +86,6 @@ void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type)
     if(vector->capacity == vector->count){
         _resizeVec(vector);
     }
-    ++(vector->count);
     memmove(&vector->objects[index+1], &vector->objects[index], (vector->count - index)*sizeof(Object*));
     
     vector->objects[index] = (Object*)malloc(sizeof(Object));
@@ -85,17 +94,22 @@ void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type)
     vector->objects[index]->ObjectType = type;
     vector->objects[index]->data = data;
     vector->objects[index]->size = size;
+
+    ++(vector->count);
 }
 
-void _resizeVec (Vec* vector){
-    vector->objects = (Object**) realloc(vector->objects, vector->capacity * sizeof(Object*) *2);
-    assert(vector->objects != NULL);
-    for (int i = vector->capacity; i < vector->capacity*2; ++i){
-        (vector->objects)[i] = (Object*) malloc(sizeof(Object));
-        assert((vector->objects)[i]!= NULL);
+void removeVector(Vec* vector, int index){
+    assert(0 <= index< vector->count);
+    if(index == vector->count - 1){
+        popVector(vector);
+        return;
     }
-    vector->capacity *= 2;
+    memmove(&vector->objects[index], &vector->objects[index+1], (vector->count - index - 1)*sizeof(Object*));
+    vector->objects[vector->count - 1] = (Object*)malloc(sizeof(Object));
+    assert(vector->objects[vector->count - 1] != NULL);
+    --(vector->count);
 }
+
 
 int lenVector(const Vec* vector){
     return vector->count;
