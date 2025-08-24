@@ -47,5 +47,5 @@ void _appendVec(Vec* vector, void* data, int size, enum ObjType type);
 void* popVector(Vec* vector);
 
 int lenVector(const Vec* vector);
-
+void* getVector(const Vec* vector, int index, int* datatype, int* size);
 #endif //VECTOR_H_

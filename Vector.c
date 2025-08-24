@@ -123,3 +123,13 @@ void _resizeVec (Vec* vector){
 int lenVector(const Vec* vector){
     return vector->count;
 }
+
+void* getVector(const Vec* vector, int index, int* datatype, int* size){
+    assert(index <= vector->count - 1);
+    void *data = (void*) vector->objects[index]->data;
+    assert(data != NULL);
+
+    *datatype = vector->objects[index]->ObjectType;
+    *size = vector->objects[index]->size;
+    return data;
+}

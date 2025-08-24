@@ -37,6 +37,14 @@ int main(void){
 
     printf("Len of my_list: %d\n", lenVector(my_list));
 
+    int datatype;
+    int size;
+    void* floats = getVector(my_list, 4, &datatype, &size);
+
+    printf("size: %d\n",size);
+    printFloatArray(floats, size);
+    printf("\n");
+
     freeVector(my_list);
     return 0;
 }
