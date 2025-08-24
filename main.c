@@ -24,12 +24,12 @@ int main(void){
     
     printVector(my_list);
     printVector(other_list);
-    appendVector(my_list, &x, INTEGER);
-    appendVector(my_list, &y, FLOAT);
-    appendVector(my_list, str, STRING);
-    appendVector(my_list, arrInt, INT_ARRAY);
-    appendVector(my_list, arrFloat, FLOAT_ARRAY);
-    appendVector(my_list, &c, CHAR);
+    appendVector(my_list, &x, 1, INTEGER);
+    appendVector(my_list, &y, 1, FLOAT);
+    appendVector(my_list, str, strlen(str), STRING);
+    appendVector(my_list, arrInt, arrlen(arrInt), INT_ARRAY);
+    appendVector(my_list, arrFloat, arrlen(arrFloat), FLOAT_ARRAY);
+    appendVector(my_list, &c, 1, CHAR);
 
 
     printVector(my_list);

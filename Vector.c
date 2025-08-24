@@ -54,9 +54,10 @@ void printVector(const Vec* vector){
     printf("}\n");
 };
 
-void _appendVec(Vec* vector, void* data, int size, enum ObjType type){
+void appendVector(Vec* vector, void* data, int size, enum ObjType type){
     assert(data!= NULL);
-    assert(INTEGER <= type <= FLOAT_ARRAY);
+
+    assert(INTEGER <= type && type <= FLOAT_ARRAY);
     if(vector->capacity == vector->count){
         _resizeVec(vector);
     }
@@ -75,12 +76,12 @@ void* popVector(Vec* vector){
     return data;
 }
 
-void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type){
+void insertVector(Vec* vector, int index, void* data, int size, enum ObjType type){
     assert(data!= NULL);
-    assert(INTEGER <= type <= FLOAT_ARRAY);
-    assert(0 <= index<= vector->count);
+    assert(INTEGER <= type && type<= FLOAT_ARRAY);
+    assert(0 <= index && index<= vector->count);
     if(index == vector->count){
-        _appendVec(vector, data, size, type);
+        appendVector(vector, data, size, type);
         return;
     }
     if(vector->capacity == vector->count){
@@ -99,7 +100,7 @@ void _insertVec(Vec* vector, int index, void* data, int size, enum ObjType type)
 }
 
 void removeVector(Vec* vector, int index){
-    assert(0 <= index< vector->count);
+    assert(0 <= index && index < vector->count);
     if(index == vector->count - 1){
         popVector(vector);
         return;
@@ -127,6 +128,6 @@ void* getVector(const Vec* vector, int index, int* datatype, int* size){
 
 void copyVector(const Vec* src, Vec* dest){
     for(int i = 0; i < src->count; i++){
-        appendVector(dest, src->objects[i]->data, src->objects[i]->ObjectType);
+        appendVector(dest, src->objects[i]->data, src->objects[i]->size, src->objects[i]->ObjectType);
     }
 }

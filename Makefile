@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGC = -O2 
+CFLAGC = -O2 -Wall -Wextra
 TARGET = main
 
 all: 
